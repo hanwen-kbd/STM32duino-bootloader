@@ -407,6 +407,25 @@
     #define LED_ON_STATE        0
 
 
+#elif defined TARGET_HW75
+
+    #define LED_BANK            GPIOB
+    #define LED_PIN             15
+    /* Unused, but kept to prevent breakage */
+    #define LED_ON_STATE        1
+
+    #define BUTTON_BANK                 GPIOB
+    #define BUTTON_PIN                  0
+    #define BUTTON_PRESSED_STATE        1
+
+    /* HanWen75 specific features */
+    
+    /* Tells the compiler that the LED uses SPI */
+    #define LED_IS_SPI
+    /* The index of the LED, starting from 0 */
+    #define LED_SPI_INDEX       0
+
+
 #else
     #error "No config for this target"
 #endif
