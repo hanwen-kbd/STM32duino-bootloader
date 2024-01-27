@@ -2,6 +2,7 @@
  * The MIT License
  *
  * Copyright (c) 2010 LeafLabs LLC.
+ * Copyright (c) 2024 Palette [@palette-dev]
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -245,6 +246,9 @@ unsigned int crMask(int pin);
 bool readPin(u32 bank, u8 pin);
 bool readButtonState();
 void strobePin(u32 bank, u8 pin, u8 count, u32 rate,u8 onState);
+#ifdef LED_IS_WS2812
+    void ws2812_reset();
+#endif
 
 void systemHardReset(void);
 void systemReset(void);

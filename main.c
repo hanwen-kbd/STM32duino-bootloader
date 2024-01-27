@@ -2,6 +2,7 @@
  * The MIT License
  *
  * Copyright (c) 2010 LeafLabs LLC.
+ * Copyright (c) 2024 Palette [@palette-dev]
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -45,6 +46,10 @@ int main()
     setupLEDAndButton();
     setupUSB();
     setupFLASH();
+#ifdef LED_IS_WS2812
+    setupSPI();
+    ws2812_reset();
+#endif
 
     switch(checkAndClearBootloaderFlag())
     {

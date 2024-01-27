@@ -2,6 +2,7 @@
  * The MIT License
  *
  * Copyright (c) 2010 LeafLabs LLC.
+ * Copyright (c) 2024 Palette [@palette-dev]
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -38,6 +39,9 @@
 #include "stm32f10x_type.h"
 #include "cortexm3_macro.h"
 #include "usb.h"
+#ifdef LED_IS_WS2812
+    #include "spi.h"
+#endif
 
 typedef void (*FuncPtr)(void);
 

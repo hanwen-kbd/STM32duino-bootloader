@@ -75,6 +75,9 @@ bool readButtonState() {
 
 void strobePin(u32 bank, u8 pin, u8 count, u32 rate,u8 onState)
 {
+#ifdef LED_IS_WS2812
+    ws2812_strobe(count, rate)
+#else
     gpio_write_bit( bank,pin,1-onState);
 
     u32 c;
@@ -93,7 +96,23 @@ void strobePin(u32 bank, u8 pin, u8 count, u32 rate,u8 onState)
         }
         gpio_write_bit( bank,pin,1-onState);
     }
+#endif
 }
+
+#ifdef LED_IS_WS2812
+
+void ws2812_strobe(u8 count, u32 rate) {
+    while (count-- > 0)
+    {
+        
+    }
+}
+
+void ws2812_reset(void) {
+    
+}
+
+#endif
 
 void systemReset(void) {
     SET_REG(RCC_CR, GET_REG(RCC_CR)     | 0x00000001);
@@ -216,6 +235,10 @@ void jumpToUser(u32 usrAddr) {
 
 #ifndef HAS_MAPLE_HARDWARE
     usbDsbBus();
+#endif
+
+#ifdef LED_IS_WS2812
+    disableSPI();
 #endif
 
 // Does nothing, as PC12 is not connected on teh Maple mini according to the schemmatic     setPin(GPIOC, 12); // disconnect usb from host. todo, macroize pin

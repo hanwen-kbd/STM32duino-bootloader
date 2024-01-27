@@ -2,6 +2,7 @@
  * The MIT License
  *
  * Copyright (c) 2010 LeafLabs LLC.
+ * Copyright (c) 2024 Palette [@palette-dev]
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -420,10 +421,12 @@
 
     /* HanWen75 specific features */
     
-    /* Tells the compiler that the LED uses SPI */
-    #define LED_IS_SPI
+    /* The count of LEDs on the one-wire bus */
+    #define WS2812_COUNT        101
     /* The index of the LED, starting from 0 */
-    #define LED_SPI_INDEX       0
+    #define WS2812_INDEX        0
+    /* The color of the LED */
+    #define WS2812_COLOR        0xFFD300
 
 
 #else
@@ -435,6 +438,11 @@
 // in order to use the boot1 pin on the Blue Pill which has a very week pullup
 #ifndef BUTTON_INPUT_MODE
 	#define BUTTON_INPUT_MODE 	CR_INPUT_PU_PD
+#endif
+
+// Tells the compiler that the LED used is a WS2811/WS2812
+#if defined(WS2812_COUNT) && defined(WS2812_INDEX) && defined(LWS2812_COLOR)
+    #define LED_IS_WS2812
 #endif
 
 #define STARTUP_BLINKS 5
